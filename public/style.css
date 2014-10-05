@@ -1,0 +1,207 @@
+@import("//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css")
+
+/**
+ * Resetting everything
+ * Since Markdown is nothing but text
+ * We put the text cursor all over the place
+ */
+* {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-style: normal;
+  cursor: text;
+}
+
+/**
+ * Giving some nice looking IDE font styles
+ * Padding is here to make it easier to read 
+ * preventing content from hitting the edges
+ */
+body {
+  padding: 1em;
+  font: 16px/1.5 Monaco, "DejaVu Sans Mono", "Lucida Console", monospace;
+}
+
+/**
+ * Mandatory line breaks
+ */
+ul, ol, p, hr, pre, h1, h2, h3, h4, h5, h6 {
+  margin: 1.5em 0;
+}
+
+/**
+ * Headings
+ */
+h1::after,
+h2::after {
+  display: block;
+}
+
+h1::after {
+  content: '===';
+}
+
+h2::after {
+  content: '---';
+}
+
+h3::before {
+  content: '### ';
+}
+
+h4::before {
+  content: '#### ';
+}
+
+h5::before {
+  content: '##### ';
+}
+
+h6::before {
+  content: '###### ';
+}
+
+/**
+ * Em tags
+ * Could work with _ as well
+ */
+em::before,
+em::after {
+  content: "*";
+}
+
+/**
+ * Strong tags
+ * Could work with __ as well
+ */
+strong::before,
+strong::after {
+  content: "**";
+}
+
+/**
+ * Code tags
+ * Only add backticks
+ * when code is not inside a pre
+ */
+:not(pre) > code::before,
+:not(pre) > code::after {
+  content: '`';
+}
+
+/**
+ * Links
+ * Resetting styles:
+ * text-decoration, color
+ */
+a {
+  color: black;
+  text-decoration: none;
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+a::before {
+  content: '[';
+}
+a::after {
+  content: "](" attr(href) ")";
+}
+a:hover {
+  cursor: pointer;
+}
+
+/**
+ * Horizontal rules
+ * Hiding the rule
+ * then display three hyphens
+ */
+hr {
+  border: none;
+}
+hr::before {
+  content: "---";
+}
+
+/**
+ * Code blocks
+ * Could work with indent as well
+ */
+pre::before,
+pre::after {
+  content: '```';
+  display: block;
+}
+
+/**
+ * Ordered lists
+ * I didn't push it to using only '1.'
+ */
+ol {
+  list-style-position: inside;
+  list-style-type: decimal;
+}
+
+/**
+ * Unordered lists
+ * 1. One space if supported, else `em`
+ */
+ul {
+  list-style: none;
+}
+ul li::before {
+  content: "*";
+  margin-right: .5em;
+  /* 1 */
+  margin-right: 1ch;
+  /* 1 */
+}
+
+/**
+ * Image tags
+ * Weird hack to prevent the image from being displayed
+ */
+img {
+  content: '';
+}
+img::before {
+  content: "![" attr(alt) "](" attr(src) ")";
+}
+
+/**
+ * Blockquote
+ * Add a chevron to first item of blockquote
+ * usually a paragraph
+ */
+blockquote :first-child::before {
+  content: '> ';
+}
+
+/**
+ * Checkbox
+ * 1. Overrides UA styles
+ */
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input[type=checkbox]:focus {
+  outline: none;
+}
+input[type=checkbox]::before {
+  content: '[ ]';
+  font: 16px/1.5 Monaco, "DejaVu Sans Mono", "Lucida Console", monospace;
+  /* 1 */
+}
+input[type=checkbox]:checked::before {
+  content: '[x]';
+}
+
